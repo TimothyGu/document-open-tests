@@ -1,0 +1,75 @@
+<!-- 
+
+Chrome 69.0.3474.0 (Official Build) canary (64-bit)
+
+Expected: true
+Actual: true
+Expected: "<p>Yay</p>"
+Thrown: TypeError: Cannot read property 'innerHTML' of null
+
+----
+
+Safari Tech Preview Release 59 (Safari 12.0, WebKit 13606.1.21)
+
+Expected: true
+Actual: true
+Expected: "<p>Yay</p>"
+Thrown: TypeError: null is not an object (evaluating 'doc.body.innerHTML')
+
+----
+
+Firefox Nightly 63.0a1 (2018-06-27) (64-bit)
+
+Expected: true
+Actual: true
+Expected: "<p>Yay</p>"
+Actual: "<p>Yay</p>"
+
+----
+
+Microsoft Edge 42.17134.1.0
+Microsoft EdgeHTML 17.17134
+
+Expected: true
+Actual: true
+Expected: "<p>Yay</p>"
+Thrown: TypeError: Unable to get property 'innerHTML' of undefined or null reference
+
+-->
+
+<meta charset="utf-8">
+<pre id=output></pre>
+
+<script>
+
+const output = document.getElementById("output");
+
+function log(thing) {
+  output.appendChild(document.createTextNode(`${thing}\n`));
+}
+
+function compare(expected, fn) {
+  log(`Expected: ${JSON.stringify(expected)}`);
+  const sentinel = {};
+  let ret = sentinel;
+  try {
+    ret = fn();
+  } catch (err) {
+    log(`Thrown: ${err}`);
+  }
+  if (ret !== sentinel) {
+    log(`Actual: ${JSON.stringify(ret)}`);
+  }
+}
+
+const parser = new DOMParser();
+const doc = parser.parseFromString("<p>Yay</p>", "text/html");
+
+const original = doc.body.innerHTML;
+
+const ret = doc.open();
+
+compare(true, () => ret === doc);
+compare(original, () => doc.body.innerHTML);
+
+</script>

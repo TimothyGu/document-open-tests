@@ -1,0 +1,67 @@
+<!-- 
+
+Chrome 69.0.3474.0 (Official Build) canary (64-bit)
+
+Expected: null
+Actual: null
+
+----
+
+Safari Tech Preview Release 59 (Safari 12.0, WebKit 13606.1.21)
+
+Expected: null
+Actual: null
+
+----
+
+Firefox Nightly 63.0a1 (2018-06-27) (64-bit)
+
+Should not be here
+
+Expected: null
+Actual: [object HTMLBodyElement]
+
+----
+
+Microsoft Edge 42.17134.1.0
+Microsoft EdgeHTML 17.17134
+
+-->
+
+<meta charset="utf-8">
+<p>Should not be here</p>
+<pre id=output></pre>
+
+<script>
+
+function log(thing) {
+  let output = document.getElementById("output");
+  if (!output) {
+    document.write('<meta charset="utf-8"><pre id=output></pre>');
+    log(thing);
+    return;
+  }
+  output.appendChild(document.createTextNode(`${thing}\n`));
+}
+
+function compare(expected, fn) {
+  const sentinel = {};
+  let ret = sentinel;
+  try {
+    ret = fn();
+  } catch (err) {
+    log(`Expected: ${expected}`);
+    log(`Thrown: ${err}`);
+  }
+  if (ret !== sentinel) {
+    log(`Expected: ${expected}`);
+    log(`Actual: ${ret}`);
+  }
+}
+
+window.stop();
+document.open();
+
+compare(null, () => document.body);
+
+</script>
