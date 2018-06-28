@@ -1,0 +1,134 @@
+<!-- 
+
+Chrome 69.0.3475.0 (Official Build) canary (64-bit)
+
+Expected: BackCompat
+Actual: BackCompat
+Expected: true
+Actual: true
+Expected: true
+Actual: true
+Expected: null
+Actual: null
+Expected: CSS1Compat
+Actual: CSS1Compat
+Expected: CSS1Compat
+Actual: CSS1Compat
+Expected: CSS1Compat
+Actual: CSS1Compat
+Expected: BackCompat
+Actual: BackCompat
+Expected: BackCompat
+Actual: BackCompat
+
+----
+
+Safari Tech Preview Release 59 (Safari 12.0, WebKit 13606.1.21)
+
+Expected: BackCompat
+Actual: BackCompat
+Expected: true
+Actual: true
+Expected: true
+Actual: true
+Expected: null
+Actual: null
+Expected: CSS1Compat
+Actual: CSS1Compat
+Expected: CSS1Compat
+Actual: CSS1Compat
+Expected: CSS1Compat
+Actual: CSS1Compat
+Expected: BackCompat
+Actual: BackCompat
+Expected: BackCompat
+Actual: BackCompat
+
+----
+
+Firefox Nightly 63.0a1 (2018-06-27) (64-bit)
+
+Expected: BackCompat
+Actual: BackCompat
+Expected: true
+Actual: true
+Expected: true
+Actual: true
+Expected: null
+Actual: [object HTMLBodyElement]
+Expected: CSS1Compat
+Actual: BackCompat
+Expected: CSS1Compat
+Actual: BackCompat
+Expected: CSS1Compat
+Actual: BackCompat
+Expected: BackCompat
+Actual: BackCompat
+Expected: BackCompat
+Actual: BackCompat
+
+----
+
+Microsoft Edge 42.17134.1.0
+Microsoft EdgeHTML 17.17134
+
+
+-->
+
+<meta charset="utf-8">
+<pre id=output></pre>
+
+<script>
+
+const buf = [];
+
+function log(thing) {
+  buf.push(`${thing}\n`);
+}
+
+function flush() {
+  let output = document.getElementById("output");
+  if (!output) {
+    document.write('<meta charset="utf-8"><pre id=output></pre>');
+    flush();
+    return;
+  }
+  for (const message of buf)
+    output.appendChild(document.createTextNode(message));
+}
+
+function compare(expected, fn) {
+  const sentinel = {};
+  let ret = sentinel;
+  try {
+    ret = fn();
+  } catch (err) {
+    log(`Expected: ${expected}`);
+    log(`Thrown: ${err}`);
+  }
+  if (ret !== sentinel) {
+    log(`Expected: ${expected}`);
+    log(`Actual: ${ret}`);
+  }
+}
+
+setTimeout(() => {
+  compare("BackCompat", () => document.compatMode);
+  const doc = document;
+  compare(true, () => document.open() === doc);
+  compare(true, () => document === doc);
+  compare(null, () => document.body);
+  compare("CSS1Compat", () => document.compatMode);
+  document.write("<!doctype html public");
+  compare("CSS1Compat", () => document.compatMode);
+  document.write(" \"-//IETF//DTD HTML 3//\"");
+  compare("CSS1Compat", () => document.compatMode);
+  document.write(">");
+  compare("BackCompat", () => document.compatMode);
+  document.close();
+  compare("BackCompat", () => document.compatMode);
+
+  flush();
+});
+
+</script>
