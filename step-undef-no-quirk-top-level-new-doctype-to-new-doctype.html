@@ -16,8 +16,6 @@ Expected: CSS1Compat
 Actual: CSS1Compat
 Expected: CSS1Compat
 Actual: CSS1Compat
-Expected: CSS1Compat
-Actual: CSS1Compat
 
 ----
 
@@ -31,8 +29,6 @@ Expected: true
 Actual: true
 Expected: null
 Actual: null
-Expected: CSS1Compat
-Actual: CSS1Compat
 Expected: CSS1Compat
 Actual: CSS1Compat
 Expected: CSS1Compat
@@ -58,8 +54,6 @@ Expected: CSS1Compat
 Actual: CSS1Compat
 Expected: CSS1Compat
 Actual: CSS1Compat
-Expected: CSS1Compat
-Actual: CSS1Compat
 
 ----
 
@@ -74,8 +68,6 @@ Expected: true
 Actual: true
 Expected: null
 Actual: null
-Expected: CSS1Compat
-Actual: CSS1Compat
 Expected: CSS1Compat
 Actual: CSS1Compat
 Expected: CSS1Compat
@@ -134,10 +126,12 @@ setTimeout(() => {
   compare("CSS1Compat", () => document.compatMode);
   document.write(">");
   compare("CSS1Compat", () => document.compatMode);
-  document.close();
-  compare("CSS1Compat", () => document.compatMode);
 
   flush();
+
+  // Convince Gecko that we are done loading the page.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=81980
+  document.close();
 });
 
 </script>
