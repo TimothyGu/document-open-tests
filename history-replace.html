@@ -1,0 +1,18 @@
+<HTML>
+<HEAD>
+<TITLE>First Document</TITLE>
+<script>
+function replace(){
+    var oNewDoc = document.open("text/html", "replace");
+    var sMarkup = "<HTML><HEAD><TITLE>New Document</TITLE><BODY>Hello, world</BODY></HTML>";
+    oNewDoc.write(sMarkup);
+    oNewDoc.close();
+}
+</script>
+</HEAD>
+<BODY>
+<h1>I just want to say</h1><br>
+<!--Button will call the replace function and replace the current page with a new one-->
+<Input type ="button" value = "Finish Sentence" onclick="replace();">
+</BODY>
+</html>
