@@ -4,15 +4,7 @@ window.addEventListener("unload", () => {
 });
 function replace(){
     var oNewDoc = document.open();
-    var sMarkup = `
-        <title>New Document</title>
-        <script>
-            window.addEventListener('unload', () => {
-                console.log('unloading');
-            })
-        </` + `script>
-        Hello, world
-    `;
+    var sMarkup = "<title>New Document</title><script>window.addEventListener('unload', () => { console.log('unloading'); });</" + "script>Hello, world";
     oNewDoc.write(sMarkup);
     oNewDoc.close();
 }
