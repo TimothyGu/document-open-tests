@@ -1,0 +1,83 @@
+<!-- 
+
+Chrome 69.0.3476.0 (Official Build) canary (64-bit)
+
+Expected: #output
+Actual: #output
+
+----
+
+Safari Tech Preview Release 59 (Safari 12.0, WebKit 13606.1.21)
+
+Expected: #output
+Actual: #output
+
+----
+
+Firefox Nightly 63.0a1 (2018-06-29) (64-bit)
+
+Expected: #output
+Actual: #output
+
+----
+
+Microsoft Edge 42.17134.1.0
+Microsoft EdgeHTML 17.17134
+
+
+-->
+
+<meta charset="utf-8">
+<pre id=output></pre>
+
+<script>
+
+if (document.location.hash !== "#output")
+  document.location.hash = "#output";
+
+const buf = [];
+
+const output = document.getElementById("output");
+
+function log(thing) {
+  buf.push(`${thing}\n`);
+}
+
+function flush() {
+  let output = document.getElementById("output");
+  if (!output) {
+    document.write('<meta charset="utf-8"><pre id=output></pre>');
+    flush();
+    return;
+  }
+  for (const message of buf)
+    output.appendChild(document.createTextNode(message));
+}
+
+function compare(expected, fn) {
+  const sentinel = {};
+  let ret = sentinel;
+  try {
+    ret = fn();
+  } catch (err) {
+    log(`Expected: ${expected}`);
+    log(`Thrown: ${err}`);
+  }
+  if (ret !== sentinel) {
+    log(`Expected: ${expected}`);
+    log(`Actual: ${ret}`);
+  }
+}
+
+setTimeout(() => {
+  document.open();
+  compare("#output", () => document.location.hash);
+
+  flush();
+
+  // Convince Gecko that we are done loading the page.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=81980
+  document.close();
+});
+
+</script>
