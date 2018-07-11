@@ -1,0 +1,12 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script>
+setTimeout(() => {
+  const ws = new WebSocket("wss://echo.websocket.org");
+  ws.onopen = parent.onOpen;
+  parent.onBeforeDocumentOpen();
+  document.open();
+  parent.onAfterDocumentOpen();
+}, 10);
+</script>

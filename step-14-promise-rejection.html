@@ -1,0 +1,52 @@
+<!-- 
+
+Chrome 69.0.3488.0 (Official Build) canary (64-bit)
+
+Going to call document.open()
+document.open() is called
+
+----
+
+Safari Tech Preview Release 60 (Safari 12.0, WebKit 13606.1.23.1)
+
+Going to call document.open()
+document.open() is called
+
+----
+
+Firefox Nightly 63.0a1 (2018-07-11) (64-bit)
+
+Going to call document.open()
+document.open() is called
+
+----
+
+Microsoft Edge 42.17134.1.0
+Microsoft EdgeHTML 17.17134
+
+
+-->
+
+<!doctype html>
+<meta charset="utf-8">
+
+<pre id=output></pre>
+
+<iframe src="step-14-promise-rejection.frame.html"></iframe>
+
+<script>
+function log(thing) {
+  const output = document.getElementById("output");
+  output.appendChild(document.createTextNode(`${thing}\n`));
+}
+
+function onBeforeDocumentOpen() {
+  log("Going to call document.open()");
+}
+function onAfterDocumentOpen() {
+  log("document.open() is called");
+}
+function onPromiseRejection() {
+  log("Unhandled promise rejection");
+}
+</script>
