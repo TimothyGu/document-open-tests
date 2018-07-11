@@ -8,7 +8,8 @@ setTimeout(() => {
     parent.onMessage();
   };
   port1.postMessage('bleh');
+  parent.onBeforeDocumentOpen();
   document.open();
-  parent.documentOpenCalled = true;
+  parent.onAfterDocumentOpen();
 }, 10);
 </script>
