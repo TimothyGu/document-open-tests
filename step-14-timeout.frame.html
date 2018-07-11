@@ -1,0 +1,11 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script>
+setTimeout(() => {
+  setTimeout(parent.onTimeout, 10);
+  parent.onBeforeDocumentOpen();
+  document.open();
+  parent.onAfterDocumentOpen();
+}, 10);
+</script>
