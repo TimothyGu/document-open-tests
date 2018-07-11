@@ -3,10 +3,12 @@
 
 <script>
 const { port1, port2 } = new MessageChannel();
-port2.onmessage = () => {
-  parent.onMessage();
-};
-port1.postMessage('bleh');
-document.open();
-parent.documentOpenCalled = true;
+setTimeout(() => {
+  port2.onmessage = () => {
+    parent.onMessage();
+  };
+  port1.postMessage('bleh');
+  document.open();
+  parent.documentOpenCalled = true;
+}, 10);
 </script>
