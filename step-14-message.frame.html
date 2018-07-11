@@ -1,0 +1,12 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script>
+const { port1, port2 } = new MessageChannel();
+port2.onmessage = () => {
+  parent.onMessage();
+};
+port1.postMessage('bleh');
+document.open();
+parent.documentOpenCalled = true;
+</script>
