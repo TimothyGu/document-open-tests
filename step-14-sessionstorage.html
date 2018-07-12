@@ -4,6 +4,8 @@ Chrome 69.0.3488.0 (Official Build) canary (64-bit)
 
 Going to call document.open()
 document.open() is called
+sessionStorage storage area changed to 2
+sessionStorage storage area changed to 3
 
 ----
 
@@ -11,6 +13,9 @@ Safari Tech Preview Release 60 (Safari 12.0, WebKit 13606.1.23.1)
 
 Going to call document.open()
 document.open() is called
+sessionStorage storage area changed to 1
+sessionStorage storage area changed to 2
+sessionStorage storage area changed to 3
 
 ----
 
@@ -18,14 +23,15 @@ Firefox Nightly 63.0a1 (2018-07-11) (64-bit)
 
 Going to call document.open()
 document.open() is called
+sessionStorage storage area changed to 1
+sessionStorage storage area changed to 2
+sessionStorage storage area changed to 3
 
 ----
 
 Microsoft Edge 42.17134.1.0
 Microsoft EdgeHTML 17.17134
 
-Going to call document.open()
-document.open() is called
 
 -->
 
@@ -48,7 +54,7 @@ function onBeforeDocumentOpen() {
 function onAfterDocumentOpen() {
   log("document.open() is called");
 }
-function onStorage() {
-  log("sessionStorage storage area changed");
+function onStorage(ev) {
+  log(`sessionStorage storage area changed to ${ev.newValue}`);
 }
 </script>

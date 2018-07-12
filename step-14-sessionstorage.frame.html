@@ -2,11 +2,15 @@
 <meta charset="utf-8">
 
 <script>
+sessionStorage.clear();
+
 setTimeout(() => {
-  window.addEventListener("storage", parent.onStorage);
-  sessionStorage.setItem("test", "123");
+  sessionStorage.setItem("test", "1");
+  parent.onstorage = parent.onStorage;
+  sessionStorage.setItem("test", "2");
   parent.onBeforeDocumentOpen();
   document.open();
   parent.onAfterDocumentOpen();
+  sessionStorage.setItem("test", "3");
 }, 10);
 </script>
