@@ -1,0 +1,13 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script>
+setTimeout(() => {
+  const img = document.body.appendChild(document.createElement('img'));
+  img.src = "http://localhost:8888/slow.png";
+  parent.onBeforeDocumentOpen();
+  document.open();
+  parent.onAfterDocumentOpen();
+  img.onload = parent.onImageLoad;
+}, 10);
+</script>
