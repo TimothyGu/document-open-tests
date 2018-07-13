@@ -2,16 +2,11 @@
 <meta charset="utf-8">
 
 <script>
-window.addEventListener("unhandledrejection", parent.onPromiseRejection);
-parent.onPromiseRejection.win = window;
 setTimeout(() => {
   Promise.reject();
   parent.onBeforeDocumentOpen();
   document.open();
   parent.onAfterDocumentOpen();
-
-  // Counter removal of event listeners from window by readding that event
-  // listener.
   window.addEventListener("unhandledrejection", parent.onPromiseRejection);
 }, 10);
 </script>
