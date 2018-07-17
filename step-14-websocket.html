@@ -20,6 +20,7 @@ Firefox Nightly 63.0a1 (2018-07-11) (64-bit)
 
 Going to call document.open()
 document.open() is called
+WebSocket connection has been closed
 
 ----
 
@@ -52,5 +53,11 @@ function onAfterDocumentOpen() {
 }
 function onOpen() {
   log("WebSocket connection has been opened");
+}
+function onClose() {
+  log("WebSocket connection has been closed");
+}
+function onError() {
+  log("WebSocket connection has errored");
 }
 </script>
