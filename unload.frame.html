@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<input type=text>
+<button onclick="activate()">Submit</button>
+<script>
+parent.log = "";
+window.onbeforeunload = () => {
+  parent.log += "beforeunload\n";
+};
+window.onpagehide = () => {
+  parent.log += "pagehide\n";
+};
+window.onunload = () => {
+  parent.log += "unload\n";
+};
+function activate() {
+  document.open();
+  document.write("<p>new content</p>");
+  document.close();
+}
+</script>
