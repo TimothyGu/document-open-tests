@@ -1,0 +1,13 @@
+<iframe id=frame src="unload-event-frame-deletion.frame1.html"></iframe>
+<button onclick="document.getElementById('frame').remove()">Run</button>
+<script>
+onbeforeunload = () => {
+  console.log("main beforeunload");
+};
+onpagehide = () => {
+  console.log("main pagehide");
+};
+onunload = () => {
+  console.log("main unload");
+};
+</script>

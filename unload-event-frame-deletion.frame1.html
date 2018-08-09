@@ -1,0 +1,16 @@
+<iframe id=frame src="unload-event-frame-deletion.frame2.html"></iframe>
+<script>
+onbeforeunload = () => {
+  console.log("frame1 beforeunload");
+  const iframe = document.getElementById("frame");
+  iframe.remove();
+  // This call unloads frame2 first. However, that frame is then skipped when
+  // it's actually its turn to unload in the main unload algorithm call.
+};
+onpagehide = () => {
+  console.log("frame1 pagehide");
+};
+onunload = () => {
+  console.log("frame1 unload");
+};
+</script>

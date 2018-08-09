@@ -1,0 +1,25 @@
+<!-- <iframe src="unload-event-frame-addition.frame2.html"></iframe> -->
+<script>
+onbeforeunload = () => {
+  console.log("frame1 beforeunload");
+  const iframe = document.createElement("iframe");
+  iframe.src = "unload-event-frame-addition.frame2.html";
+  document.body.appendChild(iframe);
+
+  // This busy wait makes Chrome recognize the new frame in the pagehide and
+  // unload callbacks, but not Safari or Firefox.
+  // The trick does not work if it's in pagehide or unload event listeners.
+  const o = Date.now();
+  while (Date.now() < o + 1000);
+};
+onpagehide = () => {
+  console.log("frame1 pagehide");
+  const iframe = document.createElement("iframe");
+  iframe.src = "unload-event-frame-addition.frame2.html";
+};
+onunload = () => {
+  console.log("frame1 unload");
+  const iframe = document.createElement("iframe");
+  iframe.src = "unload-event-frame-addition.frame2.html";
+};
+</script>

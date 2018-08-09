@@ -1,0 +1,13 @@
+<iframe src="unload-event-frame-addition.frame1.html"></iframe>
+<button onclick="location.reload()">Run</button>
+<script>
+onbeforeunload = () => {
+  console.log("main beforeunload");
+};
+onpagehide = () => {
+  console.log("main pagehide");
+};
+onunload = () => {
+  console.log("main unload");
+};
+</script>
