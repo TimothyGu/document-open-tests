@@ -1,0 +1,34 @@
+<!-- URL propagation vs. bails 2 -->
+
+<pre id="result-step-4"></pre>
+
+<script>
+function openHasTakenEffect(iframe) {
+  return !iframe.contentDocument.childNodes.length;
+}
+
+const noErr = Symbol("no error");
+
+// Step 4
+{
+  document.domain = 'localhost';
+
+  const iframe = document.body.appendChild(document.createElement("iframe"));
+  iframe.src = "http://localhost:8081/order-2.frame-step-4.html";
+  iframe.onload = () => {
+    setTimeout(() => {
+      let err = noErr;
+      try {
+        iframe.contentDocument.open();
+      } catch (e) {
+        err = e;
+      }
+      document.getElementById("result-step-4").textContent += `
+URL: ${iframe.contentDocument.URL} (order-2.frame-step-4.html)
+open() effective: ${openHasTakenEffect(iframe)} (false)
+Thrown? ${err !== noErr} (true)
+`;
+    }, 100);
+  };
+}
+</script>

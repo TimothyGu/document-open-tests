@@ -1,0 +1,45 @@
+<!-- URL propagation vs. bails 1 -->
+
+<pre id="result-step-1"></pre>
+<pre id="result-step-5"></pre>
+
+<script>
+function openHasTakenEffect(iframe) {
+  return !iframe.contentDocument.childNodes.length;
+}
+
+const noErr = Symbol("no error");
+
+// Step 1
+{
+  const iframe = document.body.appendChild(document.createElement("iframe"));
+  iframe.src = "order-1.frame-step-1.svg";
+  iframe.onload = () => {
+    setTimeout(() => {
+      let err = noErr;
+      try {
+        iframe.contentDocument.open();
+      } catch (e) {
+        err = e;
+      }
+      document.getElementById("result-step-1").textContent += `
+URL: ${iframe.contentDocument.URL} (order-1.frame-step-1.svg)
+open() effective: ${openHasTakenEffect(iframe)} (false)
+Thrown? ${err !== noErr} (true)
+`;
+    }, 100);
+  };
+}
+// Step 5
+{
+  const iframe = document.body.appendChild(document.createElement("iframe"));
+  iframe.src = "order-1.frame-step-5.html";
+  self.testStep5 = () => {
+    iframe.contentDocument.open();
+    document.getElementById("result-step-5").textContent += `
+URL: ${iframe.contentDocument.URL} (order-1.frame-step-5.html)
+open() effective: ${openHasTakenEffect(iframe)} (false)
+`;
+  };
+}
+</script>

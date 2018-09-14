@@ -1,0 +1,8 @@
+<button id="test">Start Demo</button>
+<script>
+ var button = document.getElementById('test');
+ button.setAttribute("onclick", "alert('ONE");
+ alert(button.onclick);
+ button.addEventListener('click', function () { alert('TWO') }, false);
+ button.setAttribute("onclick", "alert('ONE');");
+</script>

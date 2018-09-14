@@ -1,0 +1,12 @@
+<script>
+const map = new Map();
+function succeed(str) {
+  let i = 0;
+  if (map.has(str)) {
+    i = map.get(str) + 1;
+  }
+  map.set(str, i);
+  alert("Success! " + str + i);
+}
+</script>
+<iframe src="events-resurrection.frame.html"></iframe>

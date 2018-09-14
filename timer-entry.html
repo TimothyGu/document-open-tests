@@ -1,0 +1,12 @@
+<pre id="result"></pre>
+
+<script>
+{
+  const iframe = document.body.appendChild(document.createElement("iframe"));
+  iframe.src = "timer-entry.frame.html";
+  self.test1 = () => {
+    iframe.contentDocument.open();
+    document.getElementById("result").textContent = iframe.contentDocument.URL;
+  };
+}
+</script>

@@ -1,0 +1,17 @@
+<iframe src="history-no-replace-iframe.frame.html"></iframe>
+<button onclick="back()">BACK</button>
+<button onclick="forward()">FORWARD</button>
+<button onclick="next()">NEXT</button>
+<script>
+    const iframe = document.querySelector("iframe");
+    let i = 0;
+    function back() {
+        iframe.contentWindow.history.back();
+    }
+    function forward() {
+        iframe.contentWindow.history.forward();
+    }
+    function next() {
+        iframe.src = `history-no-replace-iframe.frame.html?${i++}`;
+    }
+</script>

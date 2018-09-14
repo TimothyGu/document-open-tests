@@ -1,0 +1,23 @@
+<div id=a></div>
+<div id=b></div>
+<div id=c></div>
+<div id=d onclick="parent.succeed('d');"></div>
+<script>
+const a = document.getElementById("a");
+const b = document.getElementById("b");
+b.addEventListener("click", () => { parent.succeed("b"); });
+const c = document.getElementById("c");
+c.onclick = () => { parent.succeed("c"); };
+const d = document.getElementById("d");
+setTimeout(() => {
+  document.open();
+  a.addEventListener("click", () => { parent.succeed("a"); });
+  b.addEventListener("click", () => { parent.succeed("b"); });
+  c.addEventListener("click", () => { parent.succeed("c"); });
+  d.addEventListener("click", () => { parent.succeed("d"); });
+  a.click();
+  b.click();
+  c.click();
+  d.click();
+}, 200);
+</script>
